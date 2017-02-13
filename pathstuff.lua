@@ -45,7 +45,5 @@ function generatePath(originX)
 		end
 	end
 	
-	-- TODO add a last node at (pathNodes[firstNode].x, wallY)
-	
 	return path
 end

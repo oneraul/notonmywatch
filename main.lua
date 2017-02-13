@@ -32,7 +32,7 @@ end
 ------------------
 
 debug_draw = true
-local debug_paths = true
+local debug_paths = false
 
 function debugDraw()
 	if debug_paths then
