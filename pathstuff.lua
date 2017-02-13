@@ -1,24 +1,25 @@
 
 pathNodes = {}
 
-pathNodes[ 1] = {x = 100, y = 100, connections = {5, 13}}
-pathNodes[ 2] = {x = 300, y = 100, connections = {6, 15}}
-pathNodes[ 3] = {x = 500, y = 100, connections = {7}}
-pathNodes[ 4] = {x = 700, y = 100, connections = {8}}
+pathNodes[ 1] = {x = 390, y = 293, connections = {5, 6, 7, 8}}
+pathNodes[ 2] = {x = 535, y = 269, connections = {9, 10}}
+pathNodes[ 3] = {x = 704, y = 279, connections = {11, 12}}
+pathNodes[ 4] = {x = 863, y = 307, connections = {13, 14, 15}}
 
-pathNodes[ 5] = {x = 100, y = 300, connections = {9, 14}}
-pathNodes[ 6] = {x = 300, y = 300, connections = {10}}
-pathNodes[ 7] = {x = 500, y = 300, connections = {11}}
-pathNodes[ 8] = {x = 700, y = 300, connections = {12}}
+pathNodes[ 5] = {x = 328, y = 390, connections = {}}
+pathNodes[ 6] = {x = 330, y = 539, connections = {}}
+pathNodes[ 7] = {x = 411, y = 531, connections = {}}
+pathNodes[ 8] = {x = 412, y = 417, connections = {}}
 
-pathNodes[ 9] = {x = 130, y = 500, connections = {}}
-pathNodes[10] = {x = 300, y = 500, connections = {}}
-pathNodes[11] = {x = 500, y = 500, connections = {}}
-pathNodes[12] = {x = 700, y = 500, connections = {}}
+pathNodes[ 9] = {x = 485, y = 399, connections = {}}
+pathNodes[10] = {x = 480, y = 510, connections = {}}
 
-pathNodes[13] = {x =  50, y = 250, connections = {}}
-pathNodes[14] = {x =  50, y = 380, connections = {}}
-pathNodes[15] = {x = 200, y = 230, connections = {}}
+pathNodes[11] = {x = 763, y = 391, connections = {}}
+pathNodes[12] = {x = 760, y = 533, connections = {}}
+
+pathNodes[13] = {x = 833, y = 400, connections = {}}
+pathNodes[14] = {x = 833, y = 513, connections = {}}
+pathNodes[15] = {x = 901, y = 426, connections = {}}
 
 function generatePath(originX)
 	local firstNode = 1

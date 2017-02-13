@@ -4,6 +4,8 @@ function love.load()
 	require 'enemy'
 
 	enemies = {}
+	
+	background_texture = love.graphics.newImage("images/bg.png")
 end
 
 function love.update(dt)
@@ -15,6 +17,7 @@ function love.update(dt)
 end
 
 function love.draw()
+	love.graphics.draw(background_texture)
 	for i, enemy in ipairs(enemies) do enemy:draw() end
 	
 	if debug_draw then debugDraw() end
@@ -33,7 +36,6 @@ local debug_paths = true
 
 function debugDraw()
 	if debug_paths then
-		love.graphics.setColor(100, 100, 100)
 		for i, node in ipairs(pathNodes) do
 			love.graphics.circle("line", node.x, node.y, 5)
 			love.graphics.print(i, node.x, node.y)
