@@ -2,6 +2,9 @@ function love.load()
 	class = require '30log'
 	require 'pathstuff'
 	require 'enemy'
+	require 'aabb'
+	require 'stage'
+	player = require 'player'
 
 	enemies = {}
 	background_texture = love.graphics.newImage("images/bg.png")
@@ -13,11 +16,14 @@ function love.update(dt)
 	for i = #enemies, 1, -1 do
 		if enemies[i]:followPath(dt) then table.remove(enemies, i) end
 	end
+	
+	player:movementAndCollision(dt)
 end
 
 function love.draw()
 	love.graphics.draw(background_texture)
 	for i, enemy in ipairs(enemies) do enemy:draw() end
+	player:draw()
 	
 	if debug_draw then debugDraw() end
 end
@@ -33,6 +39,7 @@ end
 debug_draw = true
 local debug_paths = true
 local debug_enemies = true
+local debug_stage = true
 
 function debugDraw()
 	if debug_paths then
@@ -48,6 +55,13 @@ function debugDraw()
 	if debug_enemies then
 		for i, enemy in ipairs(enemies) do
 			love.graphics.circle("fill", enemy.x, enemy.y, 3)
+		end
+		love.graphics.circle("fill", player.x, player.y, 3)
+	end
+	
+	if debug_stage then
+		for i, aabb in ipairs(stage) do
+			love.graphics.rectangle("line", aabb.x, aabb.y, aabb.w, aabb.h)
 		end
 	end
 end
