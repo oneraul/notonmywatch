@@ -4,7 +4,6 @@ function love.load()
 	require 'enemy'
 
 	enemies = {}
-	
 	background_texture = love.graphics.newImage("images/bg.png")
 end
 
@@ -32,7 +31,8 @@ end
 ------------------
 
 debug_draw = true
-local debug_paths = false
+local debug_paths = true
+local debug_enemies = true
 
 function debugDraw()
 	if debug_paths then
@@ -42,6 +42,12 @@ function debugDraw()
 			for j, other in ipairs(node.connections) do
 				love.graphics.line(node.x, node.y, pathNodes[other].x, pathNodes[other].y)
 			end
+		end
+	end
+	
+	if debug_enemies then
+		for i, enemy in ipairs(enemies) do
+			love.graphics.circle("fill", enemy.x, enemy.y, 3)
 		end
 	end
 end
