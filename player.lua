@@ -37,8 +37,20 @@ Player.x, Player.y = 540, 252
 local v = 200
 local body_width, body_height = textures.body.front[1]:getDimensions()
 
+local bodyAnimator = Animator(textures.body.front)
+local lookingDirectionX = 1 -- 1 right, 2 left
+local lookingDirectionY = "front"
+local faceState = "normal"
+local moving = false
+
 function Player:draw()
-	love.graphics.draw(textures.body.front[1], self.x-70, self.y-127)
+	love.graphics.draw(textures.body[lookingDirectionY][bodyAnimator:getCurrentFrameNumber()], self.x-70, self.y-127)
+	if lookingDirectionY == "front" then love.graphics.draw(textures.face[faceState][lookingDirectionX], self.x-70, self.y-127) end
+end
+
+function Player:update(dt)
+	self:movementAndCollision(dt)
+	if moving then bodyAnimator:update(dt) end
 end
 
 function Player:movementAndCollision(dt)
@@ -60,6 +72,8 @@ function Player:movementAndCollision(dt)
 				break
 			end
 		end
+		
+		lookingDirectionY = dy > 0 and "front" or "back"
 	end
 	
 	if dx ~= 0 then
@@ -73,7 +87,11 @@ function Player:movementAndCollision(dt)
 				end
 			end
 		end
+		
+		lookingDirectionX = dx > 0 and 1 or 2 -- is he looking left or right?
 	end
+	
+	moving = (dx ~= 0 or dy ~= 0) -- is he moving?
 end
 
 return Player

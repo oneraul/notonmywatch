@@ -1,6 +1,7 @@
 function love.load()
 	class = require '30log'
 	require 'pathstuff'
+	require 'animator'
 	require 'enemy'
 	require 'aabb'
 	require 'stage'
@@ -17,7 +18,7 @@ function love.update(dt)
 		if enemies[i]:followPath(dt) then table.remove(enemies, i) end
 	end
 	
-	player:movementAndCollision(dt)
+	player:update(dt)
 end
 
 function love.draw()
