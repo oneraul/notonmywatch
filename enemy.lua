@@ -23,6 +23,10 @@ local textures = {
 		scared = {
 			love.graphics.newImage("images/humanos/punkata/face/scared_right.png"),
 			love.graphics.newImage("images/humanos/punkata/face/scared_left.png")
+		},
+		back = {
+			love.graphics.newImage("images/humanos/punkata/face/back_right.png"),
+			love.graphics.newImage("images/humanos/punkata/face/back_left.png")
 		}
 	}
 }
@@ -34,10 +38,27 @@ function Enemy:init(window, name, input, output)
 	self.y = 200
 	self.path = generatePath(self.x)
 	self.currentNode = 1
+	
+	self.bodyAnimator = Animator(textures.body.front)
+	self.lookingDirectionX = 1 -- 1 right, 2 left
+	self.lookingDirectionY = "front"
+	self.faceState = "normal"
+	self.moving = true
 end
 
 function Enemy:draw()
-	love.graphics.draw(textures.body.front[1], self.x-70, self.y-127)
+	love.graphics.draw(textures.body[self.lookingDirectionY][self.bodyAnimator:getCurrentFrameNumber()], self.x-70, self.y-127)
+	local faceState = self.lookingDirectionY == "front" and self.faceState or "back"
+	love.graphics.draw(textures.face[faceState][self.lookingDirectionX], self.x-70, self.y-127)
+end
+
+function Enemy:update(dt)
+	if self:followPath(dt) then 
+		return true
+	else 
+		self.bodyAnimator:update(dt) 
+		return false
+	end
 end
 
 function Enemy:followPath(dt)
@@ -55,6 +76,9 @@ function Enemy:followPath(dt)
 		if l <= 5 then self.currentNode = self.currentNode+1 end
 		
 		self.x, self.y = self.x+dirX*v*dt, self.y+dirY*v*dt
+		
+		self.lookingDirectionX = dirX > 0 and 1 or 2
+		self.lookingDirectionY = dirY > 0 and "front" or "back"
 	end
 	
 	return false

@@ -15,7 +15,7 @@ function love.update(dt)
 	require("lurker").update()
 	
 	for i = #enemies, 1, -1 do
-		if enemies[i]:followPath(dt) then table.remove(enemies, i) end
+		if enemies[i]:update(dt) then table.remove(enemies, i) end
 	end
 	
 	player:update(dt)
